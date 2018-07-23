@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Credit Risk Approval</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Website title</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Credit Risk Approval</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction-executive-summary">Introduction &amp; Executive Summary</a></li>
+<li><a href="#user-defined-function">User-Defined Function</a></li>
+<li><a href="#importing-preparing-data-set">Importing &amp; Preparing Data Set</a></li>
+<li><a href="#data-exploration">Data Exploration</a><ul>
+<li><a href="#variable-identification">Variable Identification</a></li>
+<li><a href="#univariate-analysis">Univariate Analysis</a></li>
+<li><a href="#bi-variate-analysis">Bi-variate Analysis</a></li>
+</ul></li>
+<li><a href="#data-engineering">Data Engineering</a></li>
+<li><a href="#machine-learning">Machine Learning</a><ul>
+<li><a href="#logistic-regression">Logistic Regression</a></li>
+<li><a href="#linear-discriminant-analysis">linear Discriminant Analysis</a></li>
+<li><a href="#tree-based-methods">Tree Based Methods</a><ul>
+<li><a href="#prunning-the-tree">Prunning the tree</a></li>
+<li><a href="#random-forest">Random Forest</a></li>
+</ul></li>
+<li><a href="#smc-and-svm">SMC and SVM</a></li>
+</ul></li>
+<li><a href="#summary-cost-profit-consideration">Summary/ Cost-Profit Consideration</a></li>
+</ul>
+</div>
+
+<pre class="r"><code>library(ggplot2)
+library(plotly)
+library(tidyr)
+library(reshape2)
+library(cowplot)
+library(ggExtra)
+library(ggcorrplot)
+library(DataExplorer)
+library(tidyr) #to seperate data into several columns
+library(scales) #for percentages
+library(gtable)
+library(gridExtra)
+library(grid)
+library(MASS) #for LDA model fitting
+library(rockchalk) #combine factor levels
+library(knitr)
+library(kableExtra)
+library(randomForest)
+library(e1071)</code></pre>
+<div id="introduction-executive-summary" class="section level1">
+<h1>Introduction &amp; Executive Summary</h1>
+<p>This data set was donated by Prof. Hofmann and is available at the <a href="https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data)">UCI Machine Learning Respitory</a>.</p>
+<blockquote>
+<p>Given various categorical and numerical features, the aim is to build a predictive model that determines whether a bank loan applicant is a good or bad credit risk in order to assist banks in decision making when confronted with a loan applicant. These decisions are translated as profit consideration for the banks The associated risks are as follows:</p>
+</blockquote>
+<ul>
+<li>If an applicant is credit worthy, then denying a loan application results in a loss in business profit.</li>
+<li>If an applicant is not credit worthy, then approving the loan application results in financial loss.</li>
+</ul>
+<p>We assume a correct bank decision leads to 35% profit. Otherwise, if bank decises an applicant is credit worthy when in reality they are not, then the loss is 100%. Hence, the second risk has more weight than the first.</p>
+<p>Source: Dua, D. and Karra Taniskidou, E. (2017). UCI Machine Learning Repository [<a href="http://archive.ics.uci.edu/ml" class="uri">http://archive.ics.uci.edu/ml</a>]. Irvine, CA: University of California, School of Information and Computer Science.</p>
+</div>
+<div id="user-defined-function" class="section level1">
+<h1>User-Defined Function</h1>
+<p><em>cost_profit_cal</em> This function calculates the profit per applicant based on the formula [True Positive]x.35 + [False Positive] x-1 The argument takes a two element vector first first elemenet one = True Positive and element two = False Positive</p>
+<p><em>create.plots</em> Function takes in a data frame and a plotting function as their arguments and uses lapply() to create a list of plots from a specifiec data frame. In addition, a for loop is used to paste the corresponding variable name from the data to the elements of plot list. The need for this function was neccessary in order to easily plot frequency distributions, histograms, dodged bars, etc of all variables at once and in a single page. This saves time meanwhile allowing me to analyze many variables at once with ease.</p>
+<pre class="r"><code>cost_profit_cal = function(x){
+  profit = (x[1] * .35) + (-1*x[2]) #calculates profit
+  row = c(x,profit) #appends to TN and FN vector
+  return(row)
+}
+
+
+
+#function takes a data frame and a plot function as its arguments and 
+#returns a list of ggplots with their corresponding variable name pasted. 
+create.plots = function(data.frame, plot.function){
+  
+plot.list = lapply(data.frame, function(i) plot.function(i) ) #creates a list of plots
+
+plots = list() #empty list to save updated plots
+j=0
+for( i in plot.list){
+  j=j+1
+  i = i + labs(x = names(plot.list)[j]) #paste corresponding names to each plot
+  plots[[j]] = i #adds plot to list
+}
+return(plots)
+}</code></pre>
+</div>
+<div id="importing-preparing-data-set" class="section level1">
+<h1>Importing &amp; Preparing Data Set</h1>
+<p>To begin with, I’ll import the data file from UCI Machine Learning Respitory. From prior inspection, we note that the data is in .data file type with columns seperated by spaces. I will also change column names to get a better representation of the columns.</p>
+<pre class="r"><code>url = &quot;https://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data&quot;
+df = read.table(url, sep = &quot; &quot;) #reads .data files
+
+
+attr_info = 
+&quot;Attribute 1: (qualitative) 
+StatusCheckingAcc
+A11 : ... &lt; 0 DM 
+A12 : 0 &lt;= ... &lt; 200 DM 
+A13 : ... &gt;= 200 DM 
+A14 : no checking account 
+
+Attribute 2: (numerical) 
+Duration
+
+Attribute 3: (qualitative) 
+CreditHistory
+A30 : all credits paid back duly 
+A31 : all credits at this bank paid back duly 
+A32 : existing credits paid back duly till now 
+A33 : delay in paying off in the past 
+A34 : credits existing (not at this bank) 
+
+Attribute 4: (qualitative) 
+Purpose
+A40 : car (new) 
+A41 : car (used) 
+A42 : furniture/equipment 
+A43 : radio/television 
+A44 : domestic appliances 
+A45 : repairs 
+A46 : education 
+A47 : vacation 
+A48 : retraining 
+A49 : business 
+A410 : others 
+
+Attribute 5: (numerical) 
+CreditAmount
+
+Attribute 6: (qualitative) 
+SavingsAccount
+A61 : ... &lt; 100 DM 
+A62 : 100 &lt;= ... &lt; 500 DM 
+A63 : 500 &lt;= ... &lt; 1000 DM 
+A64 : .. &gt;= 1000 DM 
+A65 : no savings
+
+Attribute 7: (qualitative) 
+EmployedSince
+A71 : unemployed 
+A72 : ... &lt; 1 year 
+A73 : 1 &lt;= ... &lt; 4 years 
+A74 : 4 &lt;= ... &lt; 7 years 
+A75 : .. &gt;= 7 years 
+
+Attribute 8: (numerical) 
+InstallmentRate
+
+Attribute 9: (qualitative) 
+SexPersonalStatus
+A91 : male - divorced/separated 
+A92 : female - divorced/separated/married 
+A93 : male - single 
+A94 : male - married/widowed 
+A95 : female - single 
+
+Attribute 10: (qualitative) 
+OtherDebtors
+A101 : none 
+A102 : co-applicant 
+A103 : guarantor 
+
+Attribute 11: (numerical) 
+PresentResidenceSince
+
+Attribute 12: (qualitative) 
+Property
+A121 : real estate 
+A122 : building  
+A123 : car or other, not in attribute 6 
+A124 : no property 
+
+Attribute 13: (numerical) 
+Age
+
+Attribute 14: (qualitative) 
+OtherInstallments
+A141 : bank 
+A142 : stores 
+A143 : none 
+
+Attribute 15: (qualitative) 
+Housing
+A151 : rent 
+A152 : own 
+A153 : for free 
+
+Attribute 16: (numerical) 
+NumberOfExistingCredits
+
+Attribute 17: (qualitative) 
+Job
+A171 : unemployed/ unskilled 
+A172 : unskilled - resident 
+A173 : skilled employee / official 
+A174 : management/ self-employed/ 
+highly qualified employee/ officer 
+
+Attribute 18: (numerical) 
+NumberOfPeopleLiable
+
+Attribute 19: (qualitative) 
+Telephone
+A191 : none 
+A192 : yes 
+
+Attribute 20: (qualitative) 
+ForeignWorker
+A201 : yes 
+A202 : no 
+
+Attribute 21: (quantitative)
+GoodCredit
+1: Good
+2: Bad
+&quot;
+
+attr_list = as.list(as.vector(strsplit(attr_info, &quot;Attribute &quot;)[[1]])[2:22])
+
+attr_names = sapply(attr_list, function(attr_desc) strsplit(attr_desc, &quot;\n&quot;)[[1]][2])
+
+colnames(df) = attr_names</code></pre>
+</div>
+<div id="data-exploration" class="section level1">
+<h1>Data Exploration</h1>
+<div id="variable-identification" class="section level2">
+<h2>Variable Identification</h2>
+<p>Let’s check the first 6 rows of our data, along with its dimensions and data type of our variables.</p>
+<pre class="r"><code>dim(df); str(df); head(df)</code></pre>
+<pre><code>## [1] 1000   21</code></pre>
+<pre><code>## &#39;data.frame&#39;:    1000 obs. of  21 variables:
+##  $ StatusCheckingAcc      : Factor w/ 4 levels &quot;A11&quot;,&quot;A12&quot;,&quot;A13&quot;,..: 1 2 4 1 1 4 4 2 4 2 ...
+##  $ Duration               : int  6 48 12 42 24 36 24 36 12 30 ...
+##  $ CreditHistory          : Factor w/ 5 levels &quot;A30&quot;,&quot;A31&quot;,&quot;A32&quot;,..: 5 3 5 3 4 3 3 3 3 5 ...
+##  $ Purpose                : Factor w/ 10 levels &quot;A40&quot;,&quot;A41&quot;,&quot;A410&quot;,..: 5 5 8 4 1 8 4 2 5 1 ...
+##  $ CreditAmount           : int  1169 5951 2096 7882 4870 9055 2835 6948 3059 5234 ...
+##  $ SavingsAccount         : Factor w/ 5 levels &quot;A61&quot;,&quot;A62&quot;,&quot;A63&quot;,..: 5 1 1 1 1 5 3 1 4 1 ...
+##  $ EmployedSince          : Factor w/ 5 levels &quot;A71&quot;,&quot;A72&quot;,&quot;A73&quot;,..: 5 3 4 4 3 3 5 3 4 1 ...
+##  $ InstallmentRate        : int  4 2 2 2 3 2 3 2 2 4 ...
+##  $ SexPersonalStatus      : Factor w/ 4 levels &quot;A91&quot;,&quot;A92&quot;,&quot;A93&quot;,..: 3 2 3 3 3 3 3 3 1 4 ...
+##  $ OtherDebtors           : Factor w/ 3 levels &quot;A101&quot;,&quot;A102&quot;,..: 1 1 1 3 1 1 1 1 1 1 ...
+##  $ PresentResidenceSince  : int  4 2 3 4 4 4 4 2 4 2 ...
+##  $ Property               : Factor w/ 4 levels &quot;A121&quot;,&quot;A122&quot;,..: 1 1 1 2 4 4 2 3 1 3 ...
+##  $ Age                    : int  67 22 49 45 53 35 53 35 61 28 ...
+##  $ OtherInstallments      : Factor w/ 3 levels &quot;A141&quot;,&quot;A142&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ Housing                : Factor w/ 3 levels &quot;A151&quot;,&quot;A152&quot;,..: 2 2 2 3 3 3 2 1 2 2 ...
+##  $ NumberOfExistingCredits: int  2 1 1 1 2 1 1 1 1 2 ...
+##  $ Job                    : Factor w/ 4 levels &quot;A171&quot;,&quot;A172&quot;,..: 3 3 2 3 3 2 3 4 2 4 ...
+##  $ NumberOfPeopleLiable   : int  1 1 2 2 2 2 1 1 1 1 ...
+##  $ Telephone              : Factor w/ 2 levels &quot;A191&quot;,&quot;A192&quot;: 2 1 1 1 1 2 1 2 1 1 ...
+##  $ ForeignWorker          : Factor w/ 2 levels &quot;A201&quot;,&quot;A202&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ GoodCredit             : int  1 2 1 1 2 1 1 1 1 2 ...</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["StatusCheckingAcc"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["Duration"],"name":[2],"type":["int"],"align":["right"]},{"label":["CreditHistory"],"name":[3],"type":["fctr"],"align":["left"]},{"label":["Purpose"],"name":[4],"type":["fctr"],"align":["left"]},{"label":["CreditAmount"],"name":[5],"type":["int"],"align":["right"]},{"label":["SavingsAccount"],"name":[6],"type":["fctr"],"align":["left"]},{"label":["EmployedSince"],"name":[7],"type":["fctr"],"align":["left"]},{"label":["InstallmentRate"],"name":[8],"type":["int"],"align":["right"]},{"label":["SexPersonalStatus"],"name":[9],"type":["fctr"],"align":["left"]},{"label":["OtherDebtors"],"name":[10],"type":["fctr"],"align":["left"]},{"label":["PresentResidenceSince"],"name":[11],"type":["int"],"align":["right"]},{"label":["Property"],"name":[12],"type":["fctr"],"align":["left"]},{"label":["Age"],"name":[13],"type":["int"],"align":["right"]},{"label":["OtherInstallments"],"name":[14],"type":["fctr"],"align":["left"]},{"label":["Housing"],"name":[15],"type":["fctr"],"align":["left"]},{"label":["NumberOfExistingCredits"],"name":[16],"type":["int"],"align":["right"]},{"label":["Job"],"name":[17],"type":["fctr"],"align":["left"]},{"label":["NumberOfPeopleLiable"],"name":[18],"type":["int"],"align":["right"]},{"label":["Telephone"],"name":[19],"type":["fctr"],"align":["left"]},{"label":["ForeignWorker"],"name":[20],"type":["fctr"],"align":["left"]},{"label":["GoodCredit"],"name":[21],"type":["int"],"align":["right"]}],"data":[{"1":"A11","2":"6","3":"A34","4":"A43","5":"1169","6":"A65","7":"A75","8":"4","9":"A93","10":"A101","11":"4","12":"A121","13":"67","14":"A143","15":"A152","16":"2","17":"A173","18":"1","19":"A192","20":"A201","21":"1","_rn_":"1"},{"1":"A12","2":"48","3":"A32","4":"A43","5":"5951","6":"A61","7":"A73","8":"2","9":"A92","10":"A101","11":"2","12":"A121","13":"22","14":"A143","15":"A152","16":"1","17":"A173","18":"1","19":"A191","20":"A201","21":"2","_rn_":"2"},{"1":"A14","2":"12","3":"A34","4":"A46","5":"2096","6":"A61","7":"A74","8":"2","9":"A93","10":"A101","11":"3","12":"A121","13":"49","14":"A143","15":"A152","16":"1","17":"A172","18":"2","19":"A191","20":"A201","21":"1","_rn_":"3"},{"1":"A11","2":"42","3":"A32","4":"A42","5":"7882","6":"A61","7":"A74","8":"2","9":"A93","10":"A103","11":"4","12":"A122","13":"45","14":"A143","15":"A153","16":"1","17":"A173","18":"2","19":"A191","20":"A201","21":"1","_rn_":"4"},{"1":"A11","2":"24","3":"A33","4":"A40","5":"4870","6":"A61","7":"A73","8":"3","9":"A93","10":"A101","11":"4","12":"A124","13":"53","14":"A143","15":"A153","16":"2","17":"A173","18":"2","19":"A191","20":"A201","21":"2","_rn_":"5"},{"1":"A14","2":"36","3":"A32","4":"A46","5":"9055","6":"A65","7":"A73","8":"2","9":"A93","10":"A101","11":"4","12":"A124","13":"35","14":"A143","15":"A153","16":"1","17":"A172","18":"2","19":"A192","20":"A201","21":"1","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>This data set consists of 1000 rows and 21 columns. The first 20 are the predictors and the the last is the target variable which is a numerical data type. Being a binary classification problem, I will turn this variable into a factor.</p>
+<p>Furthermore, note that most of the columns are categorical predictors (13 of them) with several levels. In addition, these levels have been encoded into symbolic characters. Personally, before analysing data with various visual techniques, I prefer to have the factor levels with descriptive names for better interpretability. Hence, I will change the factor names as described in the German data set description, before proceeding any further.</p>
+<pre class="r"><code>for(i in 1:21){
+  attr_desc = attr_list[[i]]
+  if(length(grep(&quot;qualitative&quot;,attr_desc))&gt;0){
+    lines_all = as.vector(strsplit(attr_desc, &quot;\n&quot;)[[1]])
+    lines = lines_all[3:(length(lines_all)-1)]
+    str_vals = sapply(lines, function(line) strsplit(line, &quot; : &quot;)[[1]][2])
+    df[,i] = as.numeric(df[,i])
+    
+    for (val_i in 1:length(lines)){
+      df[,i] &lt;- ifelse(df[,i]==val_i, str_vals[val_i], df[,i])
+    }
+  }
+}</code></pre>
+<p>Next, I will subset each predictor based on variable category and check the proportions of the target variable.</p>
+<pre class="r"><code>numerical = c(2,5,8,11,13,16,18)
+factorials = setdiff(1:21,numerical)
+df.cat = df[,factorials]  #categorical subset
+df.num = df[,numerical] #numerical subset
+
+
+prop.table(table(df.cat$GoodCredit)) #checking target level propotions</code></pre>
+<pre><code>## 
+##   1   2 
+## 0.7 0.3</code></pre>
+<p>It seems that the target variable is somewhat imbalanced, with the majority class (credible applicants) having a 70% proportion and the minority class with 30%. This will be important to keep in mind since missclassifying a non-credit worthy applicant has a bigger penalty than missclassifying a credit worthy applicant.</p>
+</div>
+<div id="univariate-analysis" class="section level2">
+<h2>Univariate Analysis</h2>
+<p>As previosly stated, the majority of the predictors are categorical variables with several levels. This may be a problem since a full cross-classification of all variables may lead to zero observations in many cells. Therefore, we need to eliminate the variables that have little influence. In addition, we can combine categorical levels on imbalanced predictors, where a level has a frequency less than 5%. To do this, lets get an idea of the distributions of factor levels in each categorical veriable. I will do this by plotting bar charts.</p>
+<pre class="r"><code>bar_chart = function(i){
+  ggplot(df.cat, aes(x = i)) + 
+          geom_bar(fill = &quot;lightblue&quot;,stat = &quot;count&quot; ,aes(y = (..count..)/sum(..count..))) + scale_y_continuous(labels=scales::percent) + ylab(&quot;rel frequencies&quot;) + theme(axis.text.x = element_text(angle=25, vjust=0.6)) 
+}
+
+bar.charts = create.plots(df.cat, bar_chart)
+
+do.call(grid.arrange,bar.charts[1:4] )</code></pre>
+<p><img src="credit_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>do.call(grid.arrange,bar.charts[5:8])</code></pre>
+<p><img src="credit_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<pre class="r"><code>do.call(grid.arrange,bar.charts[8:11])</code></pre>
+<p><img src="credit_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
+<pre class="r"><code>do.call(grid.arrange,bar.charts[12:14])</code></pre>
+<p><img src="credit_files/figure-html/unnamed-chunk-7-4.png" width="672" /></p>
+<pre class="r"><code>#(lapply(df.cat, function(x) margin.table(prop.table(table(x)),1 ))) </code></pre>
+<p>Analysis of imbalanced predictors from bar plot and proportion table results:</p>
+<ol style="list-style-type: decimal">
+<li><p>$AccountStatus: Only 6.3% of applicant have an account balance above 200 DM (about 120 US dollars ). We can merge this with applicants that have a balance of 0 to 200 DM and name the new level as “some balance”</p></li>
+<li><p>$CreditHistory:</p></li>
+<li><p>$Purpose: Most individuals tend to apply to credit for their car payments and furniture. We can generalize the furniture, radio/television, repairs, and domestic into a “home related” purpose. Education, vacation, and retraining make up less than 1% each, we can include it into an “others” level and include business along too.</p></li>
+<li><p>$Account: It seems most people have less than 100 DM (about 60 dollars) in their savings account. We can group individuals with savings from 100 to above 1000.</p></li>
+<li><p>$EmploymentSince: only 6.2% of individuals are unemployed, while other levels contain &gt; 17%. We can bin unemployment and below 1 year into a single level.</p></li>
+<li><p>$PersonalStatus: divorced males make up 5% of applicants, we may bin this with the single males.</p></li>
+<li><p>$OtherDebtors: guarantors and co applicant levels can be bined together to create a “yes” or “no” levels.</p></li>
+<li><p>$OtherInstallPlans: We can merge bank and store credit installments to make a new level since stores only have a 4.7% frequency. Either you have concurrent credit or you dont.</p></li>
+<li><p>$Job: unskilled and unemployed/nonresident can be generalized to simply unskilled. The new levels can then become unskilled/unemployed, skilled, and highly skilled/management.</p></li>
+<li><p>$ForeignWorker: Only 3.7% of applicants are not foreign workers. Since there are only two levels, we can potentially eliminate this variable all together.</p></li>
+</ol>
+<p>Now for continuos variables, it is important to understand the spread and central tendency of the variables.</p>
+<pre class="r"><code>#function plots a histogram given a data frame column
+histogram = function(i){
+  ggplot(df.num, aes(x =i  )) + geom_histogram(fill = &quot;lightblue&quot;, color= &quot;black&quot;, bins = 10) 
+}
+
+
+histo.plots = create.plots(df.num, histogram)
+
+
+do.call(grid.arrange,lapply(histo.plots[1:4], function(x) ggMarginal(x, type = &quot;boxplot&quot;, fill=&quot;transparent&quot;, margins = &quot;y&quot;) ))</code></pre>
+<p><img src="credit_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>do.call(grid.arrange,lapply(histo.plots[4:7], function(x) ggMarginal(x, type = &quot;boxplot&quot;, fill=&quot;transparent&quot;, margins = &quot;y&quot;) ))</code></pre>
+<p><img src="credit_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+</div>
+<div id="bi-variate-analysis" class="section level2">
+<h2>Bi-variate Analysis</h2>
+<pre class="r"><code>require(grid)
+bar = function(i){
+   ggplot(df.cat, aes(x=i,group = GoodCredit ,fill=factor(GoodCredit))) +
+   geom_bar(position=&quot;dodge&quot; ,color=&quot;black&quot;, stat = &quot;count&quot;, aes(y = ..prop..))+theme(axis.text.x = element_text(angle=10, vjust=.6)) +geom_text(aes( label = scales::percent(..prop..), y= ..prop.. ), stat= &quot;count&quot;)+scale_fill_brewer(palette = &quot;Pastel1&quot;)
+}
+
+dodged.bars = create.plots(df.cat, bar)
+
+do.call(grid.arrange,dodged.bars[1:2])</code></pre>
+<p><img src="credit_files/figure-html/unnamed-chunk-9-1.png" width="672" /> continuos variables</p>
+</div>
+</div>
+<div id="data-engineering" class="section level1">
+<h1>Data Engineering</h1>
+<pre class="r"><code>eng.df.cat = df.cat
+eng.df.cat[] = lapply(eng.df.cat, factor)
+
+eng.df.cat$StatusCheckingAcc = combineLevels(eng.df.cat$StatusCheckingAcc,levs = c(&quot;... &gt;= 200 DM &quot;,&quot;0 &lt;= ... &lt; 200 DM &quot;), newLabel = c(&quot;Some Balance&quot;) )
+
+
+eng.df.cat$Purpose = combineLevels(eng.df.cat$Purpose, levs= c(&quot;domestic appliances &quot;,  &quot;radio/television &quot;,&quot;furniture/equipment &quot;), newLabel = c(&quot;Home Related&quot;))
+eng.df.cat$Purpose = combineLevels(eng.df.cat$Purpose, levs=c(&quot;business &quot; ,&quot;repairs &quot;,&quot;education &quot;,&quot;vacation &quot;,&quot;retraining &quot;), newLabel = c(&quot;Other&quot;))
+
+eng.df.cat$SavingsAccount = combineLevels(eng.df.cat$SavingsAccount, levs = c(&quot;.. &gt;= 1000 DM &quot;,&quot;500 &lt;= ... &lt; 1000 DM &quot;), newLabel = c(&quot;&gt;= 500&quot;))
+
+eng.df.cat$EmployedSince = combineLevels(eng.df.cat$EmployedSince, levs = c(&quot;... &lt; 1 year &quot;, &quot;unemployed &quot;), newLabel = c(&quot;&lt;1 or unemployed&quot;))
+
+eng.df.cat$SexPersonalStatus = combineLevels(eng.df.cat$SexPersonalStatus, levs = c(&quot;male - divorced/separated &quot;,&quot;male - single &quot; ), newLabel = &quot;male - single/divorced&quot; )
+
+levels(eng.df.cat$OtherDebtors)
+eng.df.cat$OtherDebtors =combineLevels( eng.df.cat$OtherDebtors, levs = c(&quot;guarantor &quot;,&quot;co-applicant &quot; ), newLabel = &quot;yes&quot;)
+
+eng.df.cat$OtherInstallments = combineLevels(eng.df.cat$OtherInstallments, levs = c(&quot;bank &quot;,&quot;stores &quot;), newLabel = c(&quot;bank/stores&quot;))
+
+eng.df.cat$Job = combineLevels(eng.df.cat$Job,levs = c(&quot;unemployed/ unskilled &quot;, &quot;unskilled - resident &quot;), newLabel = c(&quot;unemployed/unskilled&quot;) )
+
+eng.df.cat$CreditHistory = combineLevels(eng.df.cat$CreditHistory, levs = c(&quot;all credits at this bank paid back duly &quot; ,&quot;all credits paid back duly &quot; ), newLabel = c(&quot;Paid&quot;))
+
+#sapply(eng.df.cat, function(x) margin.table(prop.table(table(x)),1) )</code></pre>
+<pre class="r"><code>eng.df.cat$ForeignWorker = NULL #drops the frgn column</code></pre>
+</div>
+<div id="machine-learning" class="section level1">
+<h1>Machine Learning</h1>
+<p>It is time to fit our data with various statistical models. I will first recombine our numerical and categorical features to split the full data into two equal sets: (1) Training set that will serve to fit various statistical models and (2)Validation set that wll serve to test the accuracy of each model.</p>
+<pre class="r"><code>data = cbind(eng.df.cat,df.num)
+set.seed(1)
+
+train = sample(1:nrow(data), size = nrow(data)*.50 )
+data.train = data[train,]
+data.test = data[-train,]
+
+GoodCreditity.test = data.test$GoodCredit</code></pre>
+<div id="logistic-regression" class="section level2">
+<h2>Logistic Regression</h2>
+<pre class="r"><code>#Base Model
+logistic.fit = glm(GoodCredit~., data = data, subset = train, family = binomial)
+sig.level =data.frame(summary(logistic.fit)$coef)
+sig.level</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Estimate"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Std..Error"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["z.value"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Pr...z.."],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"-4.0224919032","2":"1.431959e+00","3":"-2.8090823","4":"4.968295e-03","_rn_":"(Intercept)"},{"1":"-1.1774806099","2":"3.274609e-01","3":"-3.5957899","4":"3.234088e-04","_rn_":"StatusCheckingAccno checking account"},{"1":"-0.2421331795","2":"3.027951e-01","3":"-0.7996601","4":"4.239077e-01","_rn_":"StatusCheckingAccSome Balance"},{"1":"0.8279743081","2":"4.828560e-01","3":"1.7147437","4":"8.639223e-02","_rn_":"CreditHistorydelay in paying off in the past"},{"1":"1.5613482604","2":"3.971152e-01","3":"3.9317266","4":"8.433796e-05","_rn_":"CreditHistoryexisting credits paid back duly till now"},{"1":"1.8154400300","2":"4.851522e-01","3":"3.7420013","4":"1.825606e-04","_rn_":"CreditHistoryPaid"},{"1":"-2.4483505675","2":"6.077786e-01","3":"-4.0283594","4":"5.616743e-05","_rn_":"Purposecar (used)"},{"1":"-0.9486702453","2":"3.076256e-01","3":"-3.0838467","4":"2.043429e-03","_rn_":"PurposeHome Related"},{"1":"-0.7228378956","2":"3.686220e-01","3":"-1.9609191","4":"4.988847e-02","_rn_":"PurposeOther"},{"1":"-0.6143957980","2":"4.134954e-01","3":"-1.4858588","4":"1.373165e-01","_rn_":"SavingsAccount100 <= ... < 500 DM"},{"1":"-1.0992783014","2":"3.790153e-01","3":"-2.9003536","4":"3.727419e-03","_rn_":"SavingsAccountno savings"},{"1":"-0.7287839254","2":"4.483301e-01","3":"-1.6255522","4":"1.040449e-01","_rn_":"SavingsAccount>= 500"},{"1":"0.2397797176","2":"3.490028e-01","3":"0.6870423","4":"4.920560e-01","_rn_":"EmployedSince1 <= ... < 4 years"},{"1":"-0.5411413173","2":"4.459416e-01","3":"-1.2134802","4":"2.249463e-01","_rn_":"EmployedSince4 <= ... < 7 years"},{"1":"0.4318976671","2":"3.792139e-01","3":"1.1389288","4":"2.547329e-01","_rn_":"EmployedSince<1 or unemployed"},{"1":"-0.3532890504","2":"4.601406e-01","3":"-0.7677851","4":"4.426149e-01","_rn_":"SexPersonalStatusmale - married/widowed"},{"1":"-0.1185437306","2":"3.105588e-01","3":"-0.3817111","4":"7.026756e-01","_rn_":"SexPersonalStatusmale - single/divorced"},{"1":"-0.6973300006","2":"4.619844e-01","3":"-1.5094234","4":"1.311906e-01","_rn_":"OtherDebtorsyes"},{"1":"-0.2050619720","2":"3.212607e-01","3":"-0.6383039","4":"5.232759e-01","_rn_":"Propertycar or other, not in attribute 6"},{"1":"0.6415386931","2":"5.547211e-01","3":"1.1565067","4":"2.474740e-01","_rn_":"Propertyno property"},{"1":"-0.5818103359","2":"3.570635e-01","3":"-1.6294311","4":"1.032218e-01","_rn_":"Propertyreal estate"},{"1":"0.9459467177","2":"2.965678e-01","3":"3.1896475","4":"1.424464e-03","_rn_":"OtherInstallmentsbank/stores"},{"1":"0.5354319821","2":"6.205264e-01","3":"0.8628674","4":"3.882104e-01","_rn_":"Housingown"},{"1":"0.8317049320","2":"6.625823e-01","3":"1.2552477","4":"2.093889e-01","_rn_":"Housingrent"},{"1":"0.4048621889","2":"4.211094e-01","3":"0.9614181","4":"3.363420e-01","_rn_":"Jobskilled employee / official"},{"1":"0.2346147212","2":"5.003296e-01","3":"0.4689204","4":"6.391266e-01","_rn_":"Jobunemployed/unskilled"},{"1":"-0.1021898875","2":"2.937343e-01","3":"-0.3478990","4":"7.279160e-01","_rn_":"Telephoneyes"},{"1":"0.0383846817","2":"1.392267e-02","3":"2.7569916","4":"5.833586e-03","_rn_":"Duration"},{"1":"0.0001020386","2":"7.414435e-05","3":"1.3762157","4":"1.687549e-01","_rn_":"CreditAmount"},{"1":"0.2347495656","2":"1.281782e-01","3":"1.8314306","4":"6.703630e-02","_rn_":"InstallmentRate"},{"1":"0.1255694291","2":"1.222451e-01","3":"1.0271938","4":"3.043292e-01","_rn_":"PresentResidenceSince"},{"1":"-0.0161311219","2":"1.265545e-02","3":"-1.2746381","4":"2.024374e-01","_rn_":"Age"},{"1":"0.6187391680","2":"2.714515e-01","3":"2.2793725","4":"2.264493e-02","_rn_":"NumberOfExistingCredits"},{"1":"0.0937084735","2":"3.554298e-01","3":"0.2636483","4":"7.920509e-01","_rn_":"NumberOfPeopleLiable"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>#Model 3
+logistic.fit3 = glm(GoodCredit~. -SexPersonalStatus -Telephone  -NumberOfPeopleLiable -Job -Housing -PresentResidenceSince -CreditAmount, data = data, subset = train, family = binomial)
+
+ 
+logistic.probs  = predict(logistic.fit3, data.test, type = &quot;response&quot;)
+#30% threshold
+glm.predict1 = rep(&quot;credible&quot;, 500)
+glm.predict1[logistic.probs &gt; .30] = &quot;non.credible&quot;
+#50% threshold
+glm.predict2 = rep(&quot;credible&quot;, 500)
+glm.predict2[logistic.probs &gt; .50] = &quot;non.credible&quot;
+
+
+glm.TN.FP1 = table(GoodCreditity.test, glm.predict1)[,1]/500
+glm.TN.FP2 = table(GoodCreditity.test, glm.predict2)[,1]/500</code></pre>
+</div>
+<div id="linear-discriminant-analysis" class="section level2">
+<h2>linear Discriminant Analysis</h2>
+<p>LDA assumes a multivariate normal distribution, hence we only use predictors that are either ordinal or continuos.</p>
+<pre class="r"><code>library(MASS)
+lda.fit = lda(GoodCredit~SavingsAccount+EmployedSince+Duration+OtherInstallments+InstallmentRate+NumberOfExistingCredits+Age+CreditAmount ,data=data, subset=train)
+
+lda.pred = predict(lda.fit, data.test)
+lda.TP.FP = table(GoodCreditity.test,lda.pred$class)[,1]/500
+
+lda.fit2 = lda(GoodCredit~. ,data=data, subset=train)
+lda.pred2 = predict(lda.fit2, data.test)
+classification = lda.pred2$class
+lda.TP.FP2 = table(GoodCreditity.test, classification)[,1]/500
+
+
+#qda
+qda.fit = qda(GoodCredit~., data=data, subset=train)
+qda.pred = predict(qda.fit, data.test)
+qda.TP.FP = table(GoodCreditity.test, qda.pred$class)[,1]/500</code></pre>
+</div>
+<div id="tree-based-methods" class="section level2">
+<h2>Tree Based Methods</h2>
+<pre class="r"><code>library(tree)
+tree.cred = tree(GoodCredit~., data, subset = train)
+tree.pred = predict(tree.cred, data.test, type=&quot;class&quot;)
+tree.TP.FP = table(GoodCreditity.test, tree.pred)[,1]/500
+
+#summary(tree.cred)</code></pre>
+<div id="prunning-the-tree" class="section level3">
+<h3>Prunning the tree</h3>
+<pre class="r"><code>set.seed(3)
+cv.data = cv.tree(tree.cred, FUN = prune.misclass)
+best.size = cv.data$size[which.min(cv.data$dev)]
+
+prune.data = prune.misclass(tree.cred, best = best.size)
+tree.pred2 = predict(prune.data, data.test, type=&quot;class&quot;)
+tree.TP.FP2 = table(GoodCreditity.test, tree.pred2)[,1]/500</code></pre>
+</div>
+<div id="random-forest" class="section level3">
+<h3>Random Forest</h3>
+<pre class="r"><code>rf.data = randomForest(GoodCredit~., data= data , subset= train, mtry = 6, importance =T)
+rf.predict = predict(rf.data, data.test)
+Forest.TP.FP = table(GoodCreditity.test, rf.predict)[,1]/500</code></pre>
+</div>
+</div>
+<div id="smc-and-svm" class="section level2">
+<h2>SMC and SVM</h2>
+<pre class="r"><code>#svm.fit = svm(GoodCredit~., data = data.train, kernel = &quot;linear&quot;, cost = 10, scale =FALSE)
+tune.out = tune(svm, GoodCredit~., data = data.train, kernel = &quot;linear&quot;, ranges = list(cost=c(0.001, 0.01, 0.1, 1,5,10,100)))
+bestmod = tune.out$best.model
+#summary(bestmod)
+
+svc.predict = predict(bestmod, data.test)
+svc.TP.FP = table( GoodCreditity.test, svc.predict)[,1]/500
+
+
+
+
+#radial kernel
+svm.fit = svm(GoodCredit~., data = data.train, kernel = &quot;radial&quot;, gamma = 1, cost = 1)
+tune.out=tune(svm, GoodCredit~., data=data.train, kernel=&quot;radial&quot;,cranges=list(cost=c(0.1,1,10,100,1000), gamma=c(0.5,1,2,3,4) ))
+bestmod = tune.out$best.model
+
+svm.predict = predict(bestmod,data.test) 
+svm.TP.FP = table(GoodCreditity.test, svm.predict)[,1]/500</code></pre>
+</div>
+</div>
+<div id="summary-cost-profit-consideration" class="section level1">
+<h1>Summary/ Cost-Profit Consideration</h1>
+<pre class="r"><code>cross.profit = data.frame(matrix(ncol = 9, nrow = 3))
+rownames(cross.profit) = c(&quot;Credible&quot;, &quot;Non-Credible&quot;, &quot;Per Applicant Profit&quot;)
+
+
+cross.profit$X1 = cost_profit_cal(glm.TN.FP1)
+cross.profit$X2 = cost_profit_cal(glm.TN.FP2)
+cross.profit$X3 = cost_profit_cal(lda.TP.FP2)
+cross.profit$X4 = cost_profit_cal(qda.TP.FP)
+cross.profit$X5 = cost_profit_cal(tree.TP.FP)
+cross.profit$X6 = cost_profit_cal(tree.TP.FP2)
+cross.profit$X7 = cost_profit_cal(Forest.TP.FP)
+cross.profit$X8 = cost_profit_cal(svc.TP.FP)
+cross.profit$X9 = cost_profit_cal(svm.TP.FP)
+
+
+
+cross.profit %&gt;%
+  kable() %&gt;%
+  kable_styling() %&gt;%
+  add_header_above(c(&quot;Test &quot;, &quot;30% threshold&quot; , &quot;50% threshold&quot;, &quot;Linear&quot;, &quot;quadratic&quot;,&quot;Unpruned Tree&quot;, &quot;Pruned Tree&quot;,&quot;Random Forest&quot;, &quot;SVC&quot;, &quot;SVM&quot;)) %&gt;%
+  add_header_above(c( &quot;&quot;, &quot;Logistic&quot; = 2, &quot;Discriminant Analysis&quot; = 2, &quot;Trees&quot; = 2, &quot;&quot; , &quot;&quot;,&quot;&quot; ))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Logistic
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Discriminant Analysis
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Trees
+</div>
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Test
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+30% threshold
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+50% threshold
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Linear
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+quadratic
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Unpruned Tree
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Pruned Tree
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Random Forest
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+SVC
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+SVM
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+X1
+</th>
+<th style="text-align:right;">
+X2
+</th>
+<th style="text-align:right;">
+X3
+</th>
+<th style="text-align:right;">
+X4
+</th>
+<th style="text-align:right;">
+X5
+</th>
+<th style="text-align:right;">
+X6
+</th>
+<th style="text-align:right;">
+X7
+</th>
+<th style="text-align:right;">
+X8
+</th>
+<th style="text-align:right;">
+X9
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Credible
+</td>
+<td style="text-align:right;">
+0.500
+</td>
+<td style="text-align:right;">
+0.600
+</td>
+<td style="text-align:right;">
+0.6040
+</td>
+<td style="text-align:right;">
+0.5780
+</td>
+<td style="text-align:right;">
+0.5760
+</td>
+<td style="text-align:right;">
+0.6180
+</td>
+<td style="text-align:right;">
+0.6440
+</td>
+<td style="text-align:right;">
+0.6160
+</td>
+<td style="text-align:right;">
+0.6660
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Non-Credible
+</td>
+<td style="text-align:right;">
+0.102
+</td>
+<td style="text-align:right;">
+0.176
+</td>
+<td style="text-align:right;">
+0.1780
+</td>
+<td style="text-align:right;">
+0.1520
+</td>
+<td style="text-align:right;">
+0.1880
+</td>
+<td style="text-align:right;">
+0.2020
+</td>
+<td style="text-align:right;">
+0.2120
+</td>
+<td style="text-align:right;">
+0.2120
+</td>
+<td style="text-align:right;">
+0.2900
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Per Applicant Profit
+</td>
+<td style="text-align:right;">
+0.073
+</td>
+<td style="text-align:right;">
+0.034
+</td>
+<td style="text-align:right;">
+0.0334
+</td>
+<td style="text-align:right;">
+0.0503
+</td>
+<td style="text-align:right;">
+0.0136
+</td>
+<td style="text-align:right;">
+0.0143
+</td>
+<td style="text-align:right;">
+0.0134
+</td>
+<td style="text-align:right;">
+0.0036
+</td>
+<td style="text-align:right;">
+-0.0569
+</td>
+</tr>
+</tbody>
+</table>
+<p>In conclusion, Logistic Regression at a 30% threshold turned out to have the biggest profit per applicant.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
