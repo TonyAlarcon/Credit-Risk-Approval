@@ -1,0 +1,9 @@
+name: "my-website-name"
+output_dir: "."
+navbar:
+  title: "Website title"
+  left:
+    - text: "Overview"
+      href: index.html
+    - text: "Credit Risk Approval"
+      href: Credit_Approval.html
