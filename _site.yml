@@ -1,9 +1,9 @@
 name: "my-website-name"
 output_dir: "."
 navbar:
-  title: "Website title"
+  title: "Data Science Projects"
   left:
-    - text: "Overview"
+    - text: "Home"
       href: index.html
-    - text: "Credit Risk Approval"
+    - text: "Credit Risk Approval Project"
       href: Credit_Approval.html
