@@ -1,5 +1,4 @@
 name: "Data Science Projects"
-output_dir: "."
 navbar:
   title: "Website title"
   left:
@@ -7,4 +6,9 @@ navbar:
       href: index.html
     - text: "Credit Risk Approval"
       href: credit.html
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    css: styles.css
 
