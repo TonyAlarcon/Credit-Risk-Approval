@@ -250,41 +250,9 @@ dim(df); str(df); head(df)
     ##  $ ForeignWorker          : Factor w/ 2 levels "A201","A202": 1 1 1 1 1 1 1 1 1 1 ...
     ##  $ GoodCredit             : int  1 2 1 1 2 1 1 1 1 2 ...
 
-    ##   StatusCheckingAcc Duration CreditHistory Purpose CreditAmount
-    ## 1               A11        6           A34     A43         1169
-    ## 2               A12       48           A32     A43         5951
-    ## 3               A14       12           A34     A46         2096
-    ## 4               A11       42           A32     A42         7882
-    ## 5               A11       24           A33     A40         4870
-    ## 6               A14       36           A32     A46         9055
-    ##   SavingsAccount EmployedSince InstallmentRate SexPersonalStatus
-    ## 1            A65           A75               4               A93
-    ## 2            A61           A73               2               A92
-    ## 3            A61           A74               2               A93
-    ## 4            A61           A74               2               A93
-    ## 5            A61           A73               3               A93
-    ## 6            A65           A73               2               A93
-    ##   OtherDebtors PresentResidenceSince Property Age OtherInstallments
-    ## 1         A101                     4     A121  67              A143
-    ## 2         A101                     2     A121  22              A143
-    ## 3         A101                     3     A121  49              A143
-    ## 4         A103                     4     A122  45              A143
-    ## 5         A101                     4     A124  53              A143
-    ## 6         A101                     4     A124  35              A143
-    ##   Housing NumberOfExistingCredits  Job NumberOfPeopleLiable Telephone
-    ## 1    A152                       2 A173                    1      A192
-    ## 2    A152                       1 A173                    1      A191
-    ## 3    A152                       1 A172                    2      A191
-    ## 4    A153                       1 A173                    2      A191
-    ## 5    A153                       2 A173                    2      A191
-    ## 6    A153                       1 A172                    2      A192
-    ##   ForeignWorker GoodCredit
-    ## 1          A201          1
-    ## 2          A201          2
-    ## 3          A201          1
-    ## 4          A201          1
-    ## 5          A201          2
-    ## 6          A201          1
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["StatusCheckingAcc"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["Duration"],"name":[2],"type":["int"],"align":["right"]},{"label":["CreditHistory"],"name":[3],"type":["fctr"],"align":["left"]},{"label":["Purpose"],"name":[4],"type":["fctr"],"align":["left"]},{"label":["CreditAmount"],"name":[5],"type":["int"],"align":["right"]},{"label":["SavingsAccount"],"name":[6],"type":["fctr"],"align":["left"]},{"label":["EmployedSince"],"name":[7],"type":["fctr"],"align":["left"]},{"label":["InstallmentRate"],"name":[8],"type":["int"],"align":["right"]},{"label":["SexPersonalStatus"],"name":[9],"type":["fctr"],"align":["left"]},{"label":["OtherDebtors"],"name":[10],"type":["fctr"],"align":["left"]},{"label":["PresentResidenceSince"],"name":[11],"type":["int"],"align":["right"]},{"label":["Property"],"name":[12],"type":["fctr"],"align":["left"]},{"label":["Age"],"name":[13],"type":["int"],"align":["right"]},{"label":["OtherInstallments"],"name":[14],"type":["fctr"],"align":["left"]},{"label":["Housing"],"name":[15],"type":["fctr"],"align":["left"]},{"label":["NumberOfExistingCredits"],"name":[16],"type":["int"],"align":["right"]},{"label":["Job"],"name":[17],"type":["fctr"],"align":["left"]},{"label":["NumberOfPeopleLiable"],"name":[18],"type":["int"],"align":["right"]},{"label":["Telephone"],"name":[19],"type":["fctr"],"align":["left"]},{"label":["ForeignWorker"],"name":[20],"type":["fctr"],"align":["left"]},{"label":["GoodCredit"],"name":[21],"type":["int"],"align":["right"]}],"data":[{"1":"A11","2":"6","3":"A34","4":"A43","5":"1169","6":"A65","7":"A75","8":"4","9":"A93","10":"A101","11":"4","12":"A121","13":"67","14":"A143","15":"A152","16":"2","17":"A173","18":"1","19":"A192","20":"A201","21":"1","_rn_":"1"},{"1":"A12","2":"48","3":"A32","4":"A43","5":"5951","6":"A61","7":"A73","8":"2","9":"A92","10":"A101","11":"2","12":"A121","13":"22","14":"A143","15":"A152","16":"1","17":"A173","18":"1","19":"A191","20":"A201","21":"2","_rn_":"2"},{"1":"A14","2":"12","3":"A34","4":"A46","5":"2096","6":"A61","7":"A74","8":"2","9":"A93","10":"A101","11":"3","12":"A121","13":"49","14":"A143","15":"A152","16":"1","17":"A172","18":"2","19":"A191","20":"A201","21":"1","_rn_":"3"},{"1":"A11","2":"42","3":"A32","4":"A42","5":"7882","6":"A61","7":"A74","8":"2","9":"A93","10":"A103","11":"4","12":"A122","13":"45","14":"A143","15":"A153","16":"1","17":"A173","18":"2","19":"A191","20":"A201","21":"1","_rn_":"4"},{"1":"A11","2":"24","3":"A33","4":"A40","5":"4870","6":"A61","7":"A73","8":"3","9":"A93","10":"A101","11":"4","12":"A124","13":"53","14":"A143","15":"A153","16":"2","17":"A173","18":"2","19":"A191","20":"A201","21":"2","_rn_":"5"},{"1":"A14","2":"36","3":"A32","4":"A46","5":"9055","6":"A65","7":"A73","8":"2","9":"A93","10":"A101","11":"4","12":"A124","13":"35","14":"A143","15":"A153","16":"1","17":"A172","18":"2","19":"A192","20":"A201","21":"1","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 
 This data set consists of 1000 rows and 21 columns. The first 20 are the predictors and the the last is the target variable which is a numerical data type. Being a binary classification problem, I will turn this variable into a factor.
 
@@ -487,146 +455,9 @@ sig.level =data.frame(summary(logistic.fit)$coef)
 sig.level
 ```
 
-    ##                                                             Estimate
-    ## (Intercept)                                            -4.0224919032
-    ## StatusCheckingAccno checking account                   -1.1774806099
-    ## StatusCheckingAccSome Balance                          -0.2421331795
-    ## CreditHistorydelay in paying off in the past            0.8279743081
-    ## CreditHistoryexisting credits paid back duly till now   1.5613482604
-    ## CreditHistoryPaid                                       1.8154400300
-    ## Purposecar (used)                                      -2.4483505675
-    ## PurposeHome Related                                    -0.9486702453
-    ## PurposeOther                                           -0.7228378956
-    ## SavingsAccount100 <= ... < 500 DM                      -0.6143957980
-    ## SavingsAccountno savings                               -1.0992783014
-    ## SavingsAccount>= 500                                   -0.7287839254
-    ## EmployedSince1 <= ... < 4 years                         0.2397797176
-    ## EmployedSince4 <= ... < 7 years                        -0.5411413173
-    ## EmployedSince<1 or unemployed                           0.4318976671
-    ## SexPersonalStatusmale - married/widowed                -0.3532890504
-    ## SexPersonalStatusmale - single/divorced                -0.1185437306
-    ## OtherDebtorsyes                                        -0.6973300006
-    ## Propertycar or other, not in attribute 6               -0.2050619720
-    ## Propertyno property                                     0.6415386931
-    ## Propertyreal estate                                    -0.5818103359
-    ## OtherInstallmentsbank/stores                            0.9459467177
-    ## Housingown                                              0.5354319821
-    ## Housingrent                                             0.8317049320
-    ## Jobskilled employee / official                          0.4048621889
-    ## Jobunemployed/unskilled                                 0.2346147212
-    ## Telephoneyes                                           -0.1021898875
-    ## Duration                                                0.0383846817
-    ## CreditAmount                                            0.0001020386
-    ## InstallmentRate                                         0.2347495656
-    ## PresentResidenceSince                                   0.1255694291
-    ## Age                                                    -0.0161311219
-    ## NumberOfExistingCredits                                 0.6187391680
-    ## NumberOfPeopleLiable                                    0.0937084735
-    ##                                                          Std..Error
-    ## (Intercept)                                            1.431959e+00
-    ## StatusCheckingAccno checking account                   3.274609e-01
-    ## StatusCheckingAccSome Balance                          3.027951e-01
-    ## CreditHistorydelay in paying off in the past           4.828560e-01
-    ## CreditHistoryexisting credits paid back duly till now  3.971152e-01
-    ## CreditHistoryPaid                                      4.851522e-01
-    ## Purposecar (used)                                      6.077786e-01
-    ## PurposeHome Related                                    3.076256e-01
-    ## PurposeOther                                           3.686220e-01
-    ## SavingsAccount100 <= ... < 500 DM                      4.134954e-01
-    ## SavingsAccountno savings                               3.790153e-01
-    ## SavingsAccount>= 500                                   4.483301e-01
-    ## EmployedSince1 <= ... < 4 years                        3.490028e-01
-    ## EmployedSince4 <= ... < 7 years                        4.459416e-01
-    ## EmployedSince<1 or unemployed                          3.792139e-01
-    ## SexPersonalStatusmale - married/widowed                4.601406e-01
-    ## SexPersonalStatusmale - single/divorced                3.105588e-01
-    ## OtherDebtorsyes                                        4.619844e-01
-    ## Propertycar or other, not in attribute 6               3.212607e-01
-    ## Propertyno property                                    5.547211e-01
-    ## Propertyreal estate                                    3.570635e-01
-    ## OtherInstallmentsbank/stores                           2.965678e-01
-    ## Housingown                                             6.205264e-01
-    ## Housingrent                                            6.625823e-01
-    ## Jobskilled employee / official                         4.211094e-01
-    ## Jobunemployed/unskilled                                5.003296e-01
-    ## Telephoneyes                                           2.937343e-01
-    ## Duration                                               1.392267e-02
-    ## CreditAmount                                           7.414435e-05
-    ## InstallmentRate                                        1.281782e-01
-    ## PresentResidenceSince                                  1.222451e-01
-    ## Age                                                    1.265545e-02
-    ## NumberOfExistingCredits                                2.714515e-01
-    ## NumberOfPeopleLiable                                   3.554298e-01
-    ##                                                           z.value
-    ## (Intercept)                                            -2.8090823
-    ## StatusCheckingAccno checking account                   -3.5957899
-    ## StatusCheckingAccSome Balance                          -0.7996601
-    ## CreditHistorydelay in paying off in the past            1.7147437
-    ## CreditHistoryexisting credits paid back duly till now   3.9317266
-    ## CreditHistoryPaid                                       3.7420013
-    ## Purposecar (used)                                      -4.0283594
-    ## PurposeHome Related                                    -3.0838467
-    ## PurposeOther                                           -1.9609191
-    ## SavingsAccount100 <= ... < 500 DM                      -1.4858588
-    ## SavingsAccountno savings                               -2.9003536
-    ## SavingsAccount>= 500                                   -1.6255522
-    ## EmployedSince1 <= ... < 4 years                         0.6870423
-    ## EmployedSince4 <= ... < 7 years                        -1.2134802
-    ## EmployedSince<1 or unemployed                           1.1389288
-    ## SexPersonalStatusmale - married/widowed                -0.7677851
-    ## SexPersonalStatusmale - single/divorced                -0.3817111
-    ## OtherDebtorsyes                                        -1.5094234
-    ## Propertycar or other, not in attribute 6               -0.6383039
-    ## Propertyno property                                     1.1565067
-    ## Propertyreal estate                                    -1.6294311
-    ## OtherInstallmentsbank/stores                            3.1896475
-    ## Housingown                                              0.8628674
-    ## Housingrent                                             1.2552477
-    ## Jobskilled employee / official                          0.9614181
-    ## Jobunemployed/unskilled                                 0.4689204
-    ## Telephoneyes                                           -0.3478990
-    ## Duration                                                2.7569916
-    ## CreditAmount                                            1.3762157
-    ## InstallmentRate                                         1.8314306
-    ## PresentResidenceSince                                   1.0271938
-    ## Age                                                    -1.2746381
-    ## NumberOfExistingCredits                                 2.2793725
-    ## NumberOfPeopleLiable                                    0.2636483
-    ##                                                            Pr...z..
-    ## (Intercept)                                            4.968295e-03
-    ## StatusCheckingAccno checking account                   3.234088e-04
-    ## StatusCheckingAccSome Balance                          4.239077e-01
-    ## CreditHistorydelay in paying off in the past           8.639223e-02
-    ## CreditHistoryexisting credits paid back duly till now  8.433796e-05
-    ## CreditHistoryPaid                                      1.825606e-04
-    ## Purposecar (used)                                      5.616743e-05
-    ## PurposeHome Related                                    2.043429e-03
-    ## PurposeOther                                           4.988847e-02
-    ## SavingsAccount100 <= ... < 500 DM                      1.373165e-01
-    ## SavingsAccountno savings                               3.727419e-03
-    ## SavingsAccount>= 500                                   1.040449e-01
-    ## EmployedSince1 <= ... < 4 years                        4.920560e-01
-    ## EmployedSince4 <= ... < 7 years                        2.249463e-01
-    ## EmployedSince<1 or unemployed                          2.547329e-01
-    ## SexPersonalStatusmale - married/widowed                4.426149e-01
-    ## SexPersonalStatusmale - single/divorced                7.026756e-01
-    ## OtherDebtorsyes                                        1.311906e-01
-    ## Propertycar or other, not in attribute 6               5.232759e-01
-    ## Propertyno property                                    2.474740e-01
-    ## Propertyreal estate                                    1.032218e-01
-    ## OtherInstallmentsbank/stores                           1.424464e-03
-    ## Housingown                                             3.882104e-01
-    ## Housingrent                                            2.093889e-01
-    ## Jobskilled employee / official                         3.363420e-01
-    ## Jobunemployed/unskilled                                6.391266e-01
-    ## Telephoneyes                                           7.279160e-01
-    ## Duration                                               5.833586e-03
-    ## CreditAmount                                           1.687549e-01
-    ## InstallmentRate                                        6.703630e-02
-    ## PresentResidenceSince                                  3.043292e-01
-    ## Age                                                    2.024374e-01
-    ## NumberOfExistingCredits                                2.264493e-02
-    ## NumberOfPeopleLiable                                   7.920509e-01
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Estimate"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Std..Error"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["z.value"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Pr...z.."],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"-4.0224919032","2":"1.431959e+00","3":"-2.8090823","4":"4.968295e-03","_rn_":"(Intercept)"},{"1":"-1.1774806099","2":"3.274609e-01","3":"-3.5957899","4":"3.234088e-04","_rn_":"StatusCheckingAccno checking account"},{"1":"-0.2421331795","2":"3.027951e-01","3":"-0.7996601","4":"4.239077e-01","_rn_":"StatusCheckingAccSome Balance"},{"1":"0.8279743081","2":"4.828560e-01","3":"1.7147437","4":"8.639223e-02","_rn_":"CreditHistorydelay in paying off in the past"},{"1":"1.5613482604","2":"3.971152e-01","3":"3.9317266","4":"8.433796e-05","_rn_":"CreditHistoryexisting credits paid back duly till now"},{"1":"1.8154400300","2":"4.851522e-01","3":"3.7420013","4":"1.825606e-04","_rn_":"CreditHistoryPaid"},{"1":"-2.4483505675","2":"6.077786e-01","3":"-4.0283594","4":"5.616743e-05","_rn_":"Purposecar (used)"},{"1":"-0.9486702453","2":"3.076256e-01","3":"-3.0838467","4":"2.043429e-03","_rn_":"PurposeHome Related"},{"1":"-0.7228378956","2":"3.686220e-01","3":"-1.9609191","4":"4.988847e-02","_rn_":"PurposeOther"},{"1":"-0.6143957980","2":"4.134954e-01","3":"-1.4858588","4":"1.373165e-01","_rn_":"SavingsAccount100 <= ... < 500 DM"},{"1":"-1.0992783014","2":"3.790153e-01","3":"-2.9003536","4":"3.727419e-03","_rn_":"SavingsAccountno savings"},{"1":"-0.7287839254","2":"4.483301e-01","3":"-1.6255522","4":"1.040449e-01","_rn_":"SavingsAccount>= 500"},{"1":"0.2397797176","2":"3.490028e-01","3":"0.6870423","4":"4.920560e-01","_rn_":"EmployedSince1 <= ... < 4 years"},{"1":"-0.5411413173","2":"4.459416e-01","3":"-1.2134802","4":"2.249463e-01","_rn_":"EmployedSince4 <= ... < 7 years"},{"1":"0.4318976671","2":"3.792139e-01","3":"1.1389288","4":"2.547329e-01","_rn_":"EmployedSince<1 or unemployed"},{"1":"-0.3532890504","2":"4.601406e-01","3":"-0.7677851","4":"4.426149e-01","_rn_":"SexPersonalStatusmale - married/widowed"},{"1":"-0.1185437306","2":"3.105588e-01","3":"-0.3817111","4":"7.026756e-01","_rn_":"SexPersonalStatusmale - single/divorced"},{"1":"-0.6973300006","2":"4.619844e-01","3":"-1.5094234","4":"1.311906e-01","_rn_":"OtherDebtorsyes"},{"1":"-0.2050619720","2":"3.212607e-01","3":"-0.6383039","4":"5.232759e-01","_rn_":"Propertycar or other, not in attribute 6"},{"1":"0.6415386931","2":"5.547211e-01","3":"1.1565067","4":"2.474740e-01","_rn_":"Propertyno property"},{"1":"-0.5818103359","2":"3.570635e-01","3":"-1.6294311","4":"1.032218e-01","_rn_":"Propertyreal estate"},{"1":"0.9459467177","2":"2.965678e-01","3":"3.1896475","4":"1.424464e-03","_rn_":"OtherInstallmentsbank/stores"},{"1":"0.5354319821","2":"6.205264e-01","3":"0.8628674","4":"3.882104e-01","_rn_":"Housingown"},{"1":"0.8317049320","2":"6.625823e-01","3":"1.2552477","4":"2.093889e-01","_rn_":"Housingrent"},{"1":"0.4048621889","2":"4.211094e-01","3":"0.9614181","4":"3.363420e-01","_rn_":"Jobskilled employee / official"},{"1":"0.2346147212","2":"5.003296e-01","3":"0.4689204","4":"6.391266e-01","_rn_":"Jobunemployed/unskilled"},{"1":"-0.1021898875","2":"2.937343e-01","3":"-0.3478990","4":"7.279160e-01","_rn_":"Telephoneyes"},{"1":"0.0383846817","2":"1.392267e-02","3":"2.7569916","4":"5.833586e-03","_rn_":"Duration"},{"1":"0.0001020386","2":"7.414435e-05","3":"1.3762157","4":"1.687549e-01","_rn_":"CreditAmount"},{"1":"0.2347495656","2":"1.281782e-01","3":"1.8314306","4":"6.703630e-02","_rn_":"InstallmentRate"},{"1":"0.1255694291","2":"1.222451e-01","3":"1.0271938","4":"3.043292e-01","_rn_":"PresentResidenceSince"},{"1":"-0.0161311219","2":"1.265545e-02","3":"-1.2746381","4":"2.024374e-01","_rn_":"Age"},{"1":"0.6187391680","2":"2.714515e-01","3":"2.2793725","4":"2.264493e-02","_rn_":"NumberOfExistingCredits"},{"1":"0.0937084735","2":"3.554298e-01","3":"0.2636483","4":"7.920509e-01","_rn_":"NumberOfPeopleLiable"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 
 ``` r
 #Model 3
