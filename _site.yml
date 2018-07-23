@@ -6,4 +6,4 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Credit Risk Approval Project"
-      href: Credit_Approval.html
+      href: credit_approval.html
