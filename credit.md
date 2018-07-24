@@ -3,28 +3,6 @@ Credit Risk Approval
 Pedro Alarcon
 July 22, 2018
 
-``` r
-library(ggplot2)
-library(plotly)
-library(tidyr)
-library(reshape2)
-library(cowplot)
-library(ggExtra)
-library(ggcorrplot)
-library(DataExplorer)
-library(tidyr) #to seperate data into several columns
-library(scales) #for percentages
-library(gtable)
-library(gridExtra)
-library(grid)
-library(MASS) #for LDA model fitting
-library(rockchalk) #combine factor levels
-library(knitr)
-library(kableExtra)
-library(randomForest)
-library(e1071)
-```
-
 Introduction & Executive Summary
 ================================
 
@@ -78,133 +56,32 @@ Importing & Preparing Data Set
 To begin with, I'll import the data file from UCI Machine Learning Respitory. From prior inspection, we note that the data is in .data file type with columns seperated by spaces. I will also change column names to get a better representation of the columns.
 
 ``` r
+library(ggplot2)
+library(plotly)
+library(tidyr)
+library(reshape2)
+library(cowplot)
+library(ggExtra)
+library(ggcorrplot)
+library(DataExplorer)
+library(tidyr) #to seperate data into several columns
+library(scales) #for percentages
+library(gtable)
+library(gridExtra)
+library(grid)
+library(MASS) #for LDA model fitting
+library(rockchalk) #combine factor levels
+library(knitr)
+library(kableExtra)
+library(randomForest)
+library(e1071)
+```
+
+``` r
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data"
 df = read.table(url, sep = " ") #reads .data files
 
 
-attr_info = 
-"Attribute 1: (qualitative) 
-StatusCheckingAcc
-A11 : ... < 0 DM 
-A12 : 0 <= ... < 200 DM 
-A13 : ... >= 200 DM 
-A14 : no checking account 
-
-Attribute 2: (numerical) 
-Duration
-
-Attribute 3: (qualitative) 
-CreditHistory
-A30 : all credits paid back duly 
-A31 : all credits at this bank paid back duly 
-A32 : existing credits paid back duly till now 
-A33 : delay in paying off in the past 
-A34 : credits existing (not at this bank) 
-
-Attribute 4: (qualitative) 
-Purpose
-A40 : car (new) 
-A41 : car (used) 
-A42 : furniture/equipment 
-A43 : radio/television 
-A44 : domestic appliances 
-A45 : repairs 
-A46 : education 
-A47 : vacation 
-A48 : retraining 
-A49 : business 
-A410 : others 
-
-Attribute 5: (numerical) 
-CreditAmount
-
-Attribute 6: (qualitative) 
-SavingsAccount
-A61 : ... < 100 DM 
-A62 : 100 <= ... < 500 DM 
-A63 : 500 <= ... < 1000 DM 
-A64 : .. >= 1000 DM 
-A65 : no savings
-
-Attribute 7: (qualitative) 
-EmployedSince
-A71 : unemployed 
-A72 : ... < 1 year 
-A73 : 1 <= ... < 4 years 
-A74 : 4 <= ... < 7 years 
-A75 : .. >= 7 years 
-
-Attribute 8: (numerical) 
-InstallmentRate
-
-Attribute 9: (qualitative) 
-SexPersonalStatus
-A91 : male - divorced/separated 
-A92 : female - divorced/separated/married 
-A93 : male - single 
-A94 : male - married/widowed 
-A95 : female - single 
-
-Attribute 10: (qualitative) 
-OtherDebtors
-A101 : none 
-A102 : co-applicant 
-A103 : guarantor 
-
-Attribute 11: (numerical) 
-PresentResidenceSince
-
-Attribute 12: (qualitative) 
-Property
-A121 : real estate 
-A122 : building  
-A123 : car or other, not in attribute 6 
-A124 : no property 
-
-Attribute 13: (numerical) 
-Age
-
-Attribute 14: (qualitative) 
-OtherInstallments
-A141 : bank 
-A142 : stores 
-A143 : none 
-
-Attribute 15: (qualitative) 
-Housing
-A151 : rent 
-A152 : own 
-A153 : for free 
-
-Attribute 16: (numerical) 
-NumberOfExistingCredits
-
-Attribute 17: (qualitative) 
-Job
-A171 : unemployed/ unskilled 
-A172 : unskilled - resident 
-A173 : skilled employee / official 
-A174 : management/ self-employed/ 
-highly qualified employee/ officer 
-
-Attribute 18: (numerical) 
-NumberOfPeopleLiable
-
-Attribute 19: (qualitative) 
-Telephone
-A191 : none 
-A192 : yes 
-
-Attribute 20: (qualitative) 
-ForeignWorker
-A201 : yes 
-A202 : no 
-
-Attribute 21: (quantitative)
-GoodCredit
-1: Good
-2: Bad
-"
 
 attr_list = as.list(as.vector(strsplit(attr_info, "Attribute ")[[1]])[2:22])
 
@@ -770,25 +647,25 @@ bar.charts = create.plots(df.cat, bar_chart)
 do.call(grid.arrange,bar.charts[1:4] )
 ```
 
-![](credit_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](credit_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
 ``` r
 do.call(grid.arrange,bar.charts[5:8])
 ```
 
-![](credit_files/figure-markdown_github/unnamed-chunk-7-2.png)
+![](credit_files/figure-markdown_github/unnamed-chunk-8-2.png)
 
 ``` r
 do.call(grid.arrange,bar.charts[8:11])
 ```
 
-![](credit_files/figure-markdown_github/unnamed-chunk-7-3.png)
+![](credit_files/figure-markdown_github/unnamed-chunk-8-3.png)
 
 ``` r
 do.call(grid.arrange,bar.charts[12:14])
 ```
 
-![](credit_files/figure-markdown_github/unnamed-chunk-7-4.png)
+![](credit_files/figure-markdown_github/unnamed-chunk-8-4.png)
 
 ``` r
 #(lapply(df.cat, function(x) margin.table(prop.table(table(x)),1 ))) 
@@ -831,13 +708,13 @@ histo.plots = create.plots(df.num, histogram)
 do.call(grid.arrange,lapply(histo.plots[1:4], function(x) ggMarginal(x, type = "boxplot", fill="transparent", margins = "y") ))
 ```
 
-![](credit_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](credit_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 ``` r
 do.call(grid.arrange,lapply(histo.plots[4:7], function(x) ggMarginal(x, type = "boxplot", fill="transparent", margins = "y") ))
 ```
 
-![](credit_files/figure-markdown_github/unnamed-chunk-8-2.png)
+![](credit_files/figure-markdown_github/unnamed-chunk-9-2.png)
 
 Bi-variate Analysis
 -------------------
@@ -854,7 +731,7 @@ dodged.bars = create.plots(df.cat, bar)
 do.call(grid.arrange,dodged.bars[1:2])
 ```
 
-![](credit_files/figure-markdown_github/unnamed-chunk-9-1.png) continuos variables
+![](credit_files/figure-markdown_github/unnamed-chunk-10-1.png) continuos variables
 
 Data Engineering
 ================
